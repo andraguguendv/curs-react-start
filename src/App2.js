@@ -1,11 +1,10 @@
-import './App.css';
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
+import {publicFetch} from "./utils/publicFetch";
 import AuthenticatedApp from "./AuthenticatedApp";
 import UnauthenticatedApp from "./UnauthenticatedApp";
-import {publicFetch} from "./utils/publicFetch";
+import {AuthContext} from "./context/authContext";
 
-function App() {
-
+const App2 = () => {
     const token = localStorage.getItem('token');
     const userInfo = localStorage.getItem('userInfo');
     const expiresAt = localStorage.getItem('expiresAt');
@@ -60,16 +59,18 @@ function App() {
         }
     }
 
-    const {userInfo: info} = loginState;
+    const proxy = {userInfo, token};
 
 
     return (
         <div className="App">
+            <AuthContext.Provider value={proxy}>
+                {loginState.token ? (<AuthenticatedApp/>) : (
+                    <UnauthenticatedApp submitCredentials={submitCredentials}/>)}
+            </AuthContext.Provider>
 
-            {loginState.token ? (<AuthenticatedApp userInfo={info}/>) : (
-                <UnauthenticatedApp submitCredentials={submitCredentials}/>)}
         </div>
     );
 }
 
-export default App;
+export default App2;

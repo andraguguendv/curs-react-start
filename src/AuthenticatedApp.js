@@ -1,15 +1,11 @@
-import Home from "./pages/Home";
-import Transactions from "./pages/Transactions";
-import Departments from "./pages/Departments";
-import UserInfo from "./pages/UserInfo";
+import NavBar from "./components/NavBar";
+import Navigation from './components/Navigation';
 
 const AuthenticatedApp = () => {
     return (
         <div>
-            <Home/>
-            <Transactions/>
-            <Departments/>
-            <UserInfo/>
+            <NavBar />
+            <Navigation />
         </div>
     )
 
